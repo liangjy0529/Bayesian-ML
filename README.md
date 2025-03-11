@@ -89,25 +89,41 @@ Formula: Similar to linear regression but with Dirichlet prior distributions on 
 ##### Description:
 The Bayesian linear regression model implemented in PyMC uses Markov Chain Monte Carlo (MCMC) sampling to estimate the relationship between predictor variables and the target variable (interest rate). The model assumes a probabilistic framework where parameters are treated as distributions rather than fixed values.
 ##### Formula: 
-<img width="212" alt="Image" src="https://github.com/user-attachments/assets/233f524a-bf59-4009-a4dc-075a21426172" />  <br>
 
 
-<img width="624" alt="Image" src="https://github.com/user-attachments/assets/bcfd5088-9572-4dd5-a53d-14fd394ad3be" />
+## Maximum A Posteriori (MAP) Bayesian Ridge Regression
 
-##### Results:
-* Intercept (α): 2458
-* Regression Coefficients (β): 2137 to 3304
-* Standard Deviation (σ): 3965
-* Effective Sample Size (ESS): Sufficient for reliable estimates.
-* Gelman-Rubin Statistic: Close to 1.000 for all parameters, confirming chain convergence.
-* The model’s predicted values closely match the observed data, indicating a good fit and reliable uncertainty quantification.
+### Description
+- **Parameters**: Uses Bayesian priors for regression coefficients, incorporating prior knowledge into parameter estimation.
+- **Common Use Cases**: Applied in credit risk modeling and loan interest rate prediction where uncertainty quantification is crucial.
 
+### Formula
+- **Formula**:
+  ```math
+  y = X\beta + \epsilon
+  ```
+  where:
+  - \( y \) is the predicted interest rate,
+  - \( X \) is the feature matrix,
+  - \( \beta \) is the regression coefficient vector,
+  - \( \epsilon \sim N(0, \sigma^2) \) is the error term.
+  - **Priors**:
+    ```math
+    \beta \sim N(0, 10), \quad \sigma \sim HalfNormal(1)
+    ```
 
+### Results
+```plaintext
+Root Mean Squared Error (RMSE): 1.7492
+Mean Absolute Error (MAE): 1.3987
+Mean Squared Error (MSE): 3.0598
+R² Score (Predictive Accuracy): 0.8421
+```
 
-
-
-
-
+### Interpretation
+- The **high predictive accuracy (R² = 0.8421)** suggests that the model effectively captures interest rate trends.
+- The **lower RMSE and MAE values** indicate better error performance compared to previous runs.
+- **Feature selection ensured model simplicity and interpretability**, but further improvements could involve testing hierarchical Bayesian priors or incorporating external economic indicators.
 
 
 
